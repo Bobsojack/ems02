@@ -6,11 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\imEquipmentController;
 use App\Http\Controllers\Controlleradmin;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\BorrowingController;
 
 //Borrow
-Route::post('/borrowings', [BorrowController::class, 'borrow']);
+Route::post('/confirm-borrow', [BorrowingController::class, 'borrow']);
 
 //Controlleradmin
 Route::post('admin/addems', [Controlleradmin::class, 'store'])->name('add.store');

@@ -18,7 +18,7 @@ body{
 .Bluebox,
 .Yellowbox,
 .Greenbox,
-.redbox {
+.redbox,.greybox {
     width: 300px;
     /* กำหนดความกว้าง */
     height: 100px;
@@ -43,6 +43,13 @@ body{
     color: #ffffff;
     
 
+}
+.greybox{
+    background-color: #b9b9b9;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
 }
 
 .Yellowbox {
@@ -92,6 +99,10 @@ a {
 .effect4 :hover{
     box-shadow: 0 0 10px #ec7063, 0 0 20px #ec7063, 0 0 20px #ec7063 inset;
 }
+.effect5 :hover{
+    box-shadow: 0 0 10px #b9b9b9, 0 0 20px #b9b9b9, 0 0 20px #b9b9b9 inset;
+}
+
 .text {
     margin-bottom: 60px;
     margin-left: 30px;

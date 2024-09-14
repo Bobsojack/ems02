@@ -39,6 +39,15 @@
             </a>
         </div>
         
+        <div class="effect5">
+            <a href="page3.html">
+                <div class="greybox">
+                    <img src="img/Return.png" alt="" class="icon" style="margin-left: 40px;"> 
+                    <span style="margin-left: 40px;">จัดคืนรายการ</span>
+                </div>
+            </a>
+        </div>
+        
         <div class="effect4">
             <a href="{{route('showname')}}">
                 <div class="redbox">

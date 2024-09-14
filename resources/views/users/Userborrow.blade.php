@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include DataTables -->
@@ -25,6 +24,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <style>
     body {
         font-family: "Pridi";
@@ -177,8 +178,8 @@
         <i class="bi bi-search"></i>
         <input type="text" id="searchInput" placeholder="ค้นหา...">
         <div class="btn-group">
-            <button type="button" id="categoryButton" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button type="button" id="categoryButton" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 เลือกหมวดหมู่
             </button>
             <div class="dropdown-menu">
@@ -187,7 +188,8 @@
                 <a class="dropdown-item" href="#" onclick="setSearchColumn(2, 'Serial No')">Serial No</a>
                 <a class="dropdown-item" href="#" onclick="setSearchColumn(3, 'Name Equipment')">Name
                     Equipment</a>
-                <a class="dropdown-item" href="#" onclick="setSearchColumn(4, 'Cost(Baht)')">Cost(Baht)</a>
+                <a class="dropdown-item" href="#"
+                    onclick="setSearchColumn(4, 'Cost(Baht)')">Cost(Baht)</a>
                 <a class="dropdown-item" href="#" onclick="setSearchColumn(5, 'Location')">Location</a>
                 <a class="dropdown-item" href="#" onclick="setSearchColumn(6, 'Starting Date')">Starting
                     Date</a>
@@ -214,23 +216,20 @@
         </thead>
         <tbody>
             @foreach ($equipments as $equipment)
-                <tr>
-                    <td>{{ $equipment->GroupofEquipment }}</td>
-                    <td>{{ $equipment->SerialNo }}</td>
-                    <td>{{ $equipment->NameEquipment }}</td>
-                    <td>{{ $equipment->cost }}</td>
-                    <td>{{ $equipment->location }}</td>
-                    <td>{{ $equipment->StartingDate }}</td>
-                    <td>{{ $equipment->Status }}</td>
-                    <td>{{ $equipment->Company }}</td>
-                    <td>
-                        <button id="selectButton{{ $equipment->SerialNo }}"
-                            onclick="toggleSelection('{{ $equipment->SerialNo }}', '{{ $equipment->NameEquipment }}', '{{ $equipment->cost }}', '{{ $equipment->location }}', '{{ $equipment->Status }}')"
-                            class="btn btn-custom">Select</button>
-                    </td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $equipment->GroupofEquipment }}</td>
+                <td>{{ $equipment->SerialNo }}</td>
+                <td>{{ $equipment->NameEquipment }}</td>
+                <td>{{ $equipment->cost }}</td>
+                <td>{{ $equipment->location }}</td>
+                <td>{{ $equipment->StartingDate }}</td>
+                <td>{{ $equipment->Status }}</td>
+                <td>{{ $equipment->Company }}</td>
+                <td>
+                    <button id="selectButton{{ $equipment->SerialNo }}" onclick="toggleSelection('{{ $equipment->SerialNo }}', '{{ $equipment->NameEquipment }}', '{{ $equipment->cost }}', '{{ $equipment->location }}', '{{ $equipment->Status }}')" class="btn btn-custom">เลือก</button>
+                </td>
 
+                @endforeach
         </tbody>
     </table>
 
@@ -241,8 +240,7 @@
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="cartModalLabel">
-                        <img src="{{ asset('img/check.png') }}" alt="" style="width: 30px; height: 30px; ">
-                        รายการอุปกรณ์ที่เลือก
+                        <img src="{{ asset('img/check.png') }}" alt="" style="width: 30px; height: 30px; "> รายการอุปกรณ์ที่เลือก
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -323,26 +321,22 @@
                         <!-- กำหนดวันยืม อยู่ฝั่งซ้าย -->
                         <div class="col-md-6 text-left">
                             <label class="form-label">
-                                <img src="{{ asset('img/date.png') }}" alt=""
-                                    style="width: 30px; height:30px "> กำหนดวันที่เริ่มยืม
+                                <img src="{{asset('img/date.png')}}" alt="" style="width: 30px; height:30px "> กำหนดวันที่เริ่มยืม
                             </label>
-                            <input type="date" id="startDate" class="form-control"
-                                style="width: 200px; display: inline-block;">
+                            <input type="date" id="startDate" class="form-control" style="width: 200px; display: inline-block;">
                         </div>
 
                         <!-- กำหนดวันคืน อยู่ฝั่งขวา -->
                         <div class="col-md-6 text-right">
                             <label class="form-label">
-                                <img src="{{ asset('img/date.png') }}" alt=""
-                                    style="width: 30px; height:30px "> กำหนดวันที่คืน
+                                <img src="{{asset('img/date.png')}}" alt="" style="width: 30px; height:30px "> กำหนดวันที่คืน
                             </label>
-                            <input type="date" id="endDate" class="form-control"
-                                style="width: 200px; display: inline-block;">
+                            <input type="date" id="endDate" class="form-control" style="width: 200px; display: inline-block;">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิกรายการ</button>
-                        <button type="button" class="btn btn-primary">ยืนยันรายการ</button>
+                        <button type="button" class="btn btn-primary" onclick="confirmSelection()">ยืนยันรายการ</button>
                     </div>
                 </div>
             </div>
@@ -358,36 +352,67 @@
                     alert('กรุณากรอกข้อมูลให้ครบถ้วน');
                     return;
                 }
-
-                var borrowingData = {
-                    items: selectedEquipment,
-                    start_date: startDate,
-                    end_date: endDate,
-                    status: 'รอ' // สถานะเริ่มต้น
-                };
-
-                $.ajax({
-                    url: '/borrowings', // URL สำหรับส่งข้อมูลไปที่ Controller
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}', // Laravel CSRF Token
-                        borrowing: borrowingData
-                    },
-                    success: function(response) {
-                        alert('บันทึกข้อมูลสำเร็จ');
-                        // อาจจะทำการรีเฟรชหน้าหรือเปลี่ยนไปยังหน้าถัดไป
-                        location.reload();
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                        alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-                    }
-                });
             });
 
+            function confirmSelection() {
+    // ตรวจสอบตัวแปร selectedEquipment ว่ามีรายการอุปกรณ์ถูกเลือกหรือไม่
+    console.log("รายการที่ถูกเลือก:", selectedEquipment);
+
+    if (selectedEquipment.length === 0) {
+        alert('กรุณาเลือกครุภัณฑ์อย่างน้อยหนึ่งรายการ');
+        return;
+    }
+    let startDate = document.getElementById('startDate').value;
+    let endDate = document.getElementById('endDate').value;
+    console.log('startDate',startDate);
+    console.log('endDate',endDate);
+
+    selectedEquipment.forEach(s=>{
+        s.start_date = startDate;
+        s.end_date = endDate;
+    });
 
 
+    // แปลงข้อมูล selectedEquipment เป็น JSON เพื่อส่งไปยัง backend
+    var jsonData = JSON.stringify(selectedEquipment);
+    
+    console.log("ข้อมูล JSON ที่จะส่ง:", jsonData); // ตรวจสอบข้อมูลที่จะส่ง
 
+    // ตัวอย่างการส่งข้อมูลไปยัง backend (เช่น ใช้ AJAX)
+    fetch('/confirm-borrow', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: jsonData
+    })
+    .then(response => {
+        // ตรวจสอบ status code ของ response
+        console.log("Status Code:", response.status);
+
+        // แปลง response เป็น JSON
+        return response.json();
+    })
+    .then(data => {
+        // ตรวจสอบข้อมูลที่ backend ตอบกลับมา
+        console.log("Response from backend:", data);
+
+        if (data.success) {
+            alert('ยืนยันการยืมสำเร็จ!');
+            // ล้างข้อมูลที่เลือกทั้งหมด
+            selectedEquipment = [];
+            updateCartModal();
+            updateItemCount();
+        } else {
+            alert('เกิดข้อผิดพลาดในการยืนยัน: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error); // ตรวจสอบข้อผิดพลาดของ fetch
+        alert('เกิดข้อผิดพลาดขณะส่งข้อมูล');
+    });
+}
 
             document.getElementById('endDate').addEventListener('change', function() {
                 var startDate = document.getElementById('startDate').value;
@@ -525,6 +550,8 @@
         <button id="prevPage" class="btn btn-secondary mr-2">ย้อนกลับ</button>
         <button id="nextPage" class="btn btn-primary">ต่อไป</button>
     </div>
+
+</body>
 
 </body>
 
