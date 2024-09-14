@@ -1,0 +1,102 @@
+body {
+    font-family: "Pridi";
+    font-weight: 200;
+    font-style: normal;
+}
+
+.topic {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    /* Ensure spacing below */
+}
+
+.topic img {
+    margin-right: 10px;
+    margin-top: 20px;
+}
+.container{
+    margin-left: 140px;
+}
+.search-container {
+    position: relative;
+    margin-left: 160px;
+}
+
+.search-container input {
+    padding-left: 30px;
+}
+
+.search-container .bi {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: #6c757d;
+}
+
+.colum {
+    background-color: rgb(199, 241, 241);
+    margin-top: 10px;
+    text-align: center;
+}
+
+#equipmentTable {
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 130px;
+}
+
+#equipmentTable th {
+    padding: 10px;
+    text-align: center;
+}
+
+#equipmentTable th:nth-child(1) {
+    width: 20%;
+}
+
+#equipmentTable th:nth-child(2) {
+    width: 15%;
+}
+
+h5 {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#searchInput {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.cart-button {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.cart-button button {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.cart-button i {
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-custom-selected {
+    background-color: red;
+    color: white;
+
+}

@@ -1,0 +1,98 @@
+body{
+    font-family: "Pridi";
+    font-weight: 500;
+    font-style: normal;
+}
+.dashboard-container {
+    display: flex;
+    /* ใช้ Flexbox */
+    justify-content: center;
+    /* แบ่งระยะห่างเท่าๆ กัน */
+    width: 100%;
+    /* ใช้เต็มหน้าจอ */
+    margin-top: 50px;
+    gap: 40px;
+
+}
+
+.Bluebox,
+.Yellowbox,
+.Greenbox,
+.redbox {
+    width: 300px;
+    /* กำหนดความกว้าง */
+    height: 100px;
+    /* กำหนดความสูง */
+    border-radius: 5px;
+    /* กำหนดขอบมน */
+    display: flex;
+    /* ใช้ Flexbox */
+    align-items: center;
+    /* จัดให้องค์ประกอบในแนวตั้งอยู่ตรงกลาง */
+    justify-content: center;
+    /* จัดให้องค์ประกอบในแนวนอนอยู่ตรงกลาง */
+    text-align: center;
+    /* จัดข้อความให้อยู่ตรงกลาง */
+}
+
+.Bluebox {
+    background-color: #0099ff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+    
+
+}
+
+.Yellowbox {
+    background-color: #e9d06b;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+}
+
+.Greenbox {
+    background-color: #58d68d;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+}
+
+.redbox {
+    background-color: #ec7063;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #ffffff;
+}
+
+.icon {
+    margin-left: 20px;
+    width: 60px;
+    height: 60px;
+   
+}
+
+a {
+    text-decoration: none;
+    
+}
+.effect1 :hover{
+    box-shadow: 0 0 10px #0099ff, 0 0 20px #0099ff, 0 0 20px #0099ff inset;
+}
+.effect2 :hover{
+    box-shadow: 0 0 10px #f7dc6f, 0 0 20px #f7dc6f, 0 0 20px #f7dc6f inset;
+}
+.effect3 :hover{
+    box-shadow: 0 0 10px #58d68d, 0 0 20px #58d68d, 0 0 20px #58d68d inset;
+}
+.effect4 :hover{
+    box-shadow: 0 0 10px #ec7063, 0 0 20px #ec7063, 0 0 20px #ec7063 inset;
+}
+.text {
+    margin-bottom: 60px;
+    margin-left: 30px;
+}
