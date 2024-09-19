@@ -53,8 +53,8 @@ Route::get('admin/Equipment', function () {
     return view('admin/Equipment');
 });
 Route::get('/', function () {
-    return view('admin/login');
-})->name('/auth/login');
+    return view('auth/login');
+})->name('auth/login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -103,15 +103,15 @@ Route::post('register', [RegisterController::class, 'register']);
 
 
 //routes for Admin
-use App\Http\Controllers\admin\LoginController as AdminLoginController;
-use App\Http\Controllers\admin\LoginController as AdminLoginControllers;
+use App\Http\Controllers\Auth\LoginController ;
 
-Route::get('/login', [AdminLoginController::class, 'index'])->name('index.login');
-Route::post('/login', [AdminLoginControllers::class, 'authenticate'])->name('admin.login');
+
+Route::get('/login', [LoginController::class, 'index'])->name('index.login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('admin.login');
 
 
 Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\ProfileController;
 

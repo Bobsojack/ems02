@@ -6,74 +6,61 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/dashboard';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index()
+    {
+        return view("auth/login");
+    }
+  public function __construct()
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
-
-    public function login(Request $request)
+    public function authenticate(Request $request)
     {
-        $input = $request->all();
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|',
+            'password' => 'required',
 
-        $this->validate($request,[
-            'email'=> 'required|email|',
-            'password'=> 'required'
         ]);
-        // $validator = validator::make($request->all(), [
-        //     'email' => 'required|email',
-        //     'password' => 'reqired'
-        // ]);
 
 
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
-
-            return redirect()->route('users/Home');
-
-        } else {
-            return redirect()->route('login')->with('error', 'Email-address and Password');
-
-            // if ($validator->passes()) {
-            //     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
-            //     } else {
-            //         return redirect()->route('login')->with('Either email or password is uncorrect');
-            //     }
-
-            // } else {
-            //     return redirect()->route('accout.login')
-            //         ->withInput()->withErrors($validator);
-            // }
+        if ($validator->passes()) {
+            if (Auth::guard()->attempt(['email' => $request->email, 'password' => $request->password])) {
+                // ตรวจสอบบทบาทของผู้ใช้ที่เข้าสู่ระบบว่าไม่ใช่ "admin"
+                if (Auth::guard()->user()->role == "Admin") {
+                    // ล็อกเอาท์และเปลี่ยนเส้นทางไปยังหน้าล็อกอินพร้อมข้อความแสดงข้อผิดพลาด
+                    
+                    return redirect()->route('admin.dashboard');
+                }
+                // เปลี่ยนเส้นทางไปยังแดชบอร์ดของผู้ดูแลระบบเมื่อเข้าสู่ระบบสำเร็จ
+                return redirect()->route('users/Home');
+            } else {
+                // เปลี่ยนเส้นทางกลับพร้อมข้อความแสดงข้อผิดพลาดหากการยืนยันตัวตนล้มเหลว
+                return redirect()->route('index.login')->with('error', 'You are not authorized to access this page.');
+            }
+        } 
+       
+        
+        
+        else {
+            // เปลี่ยนเส้นทางกลับพร้อมข้อผิดพลาดการยืนยันข้อมูลหากการยืนยันล้มเหลว
+            return redirect()->route('index.login')
+                ->withInput()
+                ->withErrors($validator);
         }
+
+        
+
+
+
     }
+
+
 }

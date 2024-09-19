@@ -141,7 +141,7 @@ button {
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('admin.login') }}">
                             @csrf
                             <div class="warpper">
                                 <h1>login</h1>

@@ -1,8 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 20px;
+   
+  
 }
 
 h1 {
@@ -92,7 +91,7 @@ tr:hover {
 }
 
 .edit-button {
-    background-color: #28a745;
+    background-color: #a5a728;
 }
 
 .edit-button:hover {
