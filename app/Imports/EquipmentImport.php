@@ -9,32 +9,56 @@ class EquipmentImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
-        dd($row);
-        if (isset($row['startingdate']) && is_numeric($row['startingdate'])) {
-            $startingDate = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['startingdate'])->format('Y-m-d');
+        // Convert Excel serial date for 'buydate'
+        if (isset($row['buydate']) && is_numeric($row['buydate'])) {
+            $buyDate = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['buydate'])->format('Y-m-d');
         } else {
-            // กำหนดค่าหรือจัดการกรณีที่ค่าไม่ถูกต้องตามที่ต้องการ
-            \Log::warning('Invalid date format for startingdate:', ['startingdate' => $row['startingdate']]);
-            $startingDate = null; // หรือกำหนดค่าเริ่มต้นอื่น ๆ ตามต้องการ
+            \Log::warning('Invalid date format for buydate:', ['buydate' => $row['buydate']]);
+            $buyDate = null;
         }
-        $cost = (float) $row['costbaht'];
-        $maxCost = 99999999.99; // Adjust based on your column definition
+    
+        // Convert Excel serial date for 'create_time'
+        if (isset($row['createtime']) && is_numeric($row['createtime'])) {
+            $createTime = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['createtime'])->format('Y-m-d H:i:s');
+        } else {
+            \Log::warning('Invalid datetime format for createtime:', ['createtime' => $row['createtime']]);
+            $createTime = null;
+        }
 
+        if (isset($row['updatetime']) && is_numeric($row['updatetime'])) {
+            $updatetime = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['updatetime'])->format('Y-m-d H:i:s');
+        } else {
+            \Log::warning('Invalid datetime format for updatetime:', ['updatetime' => $row['updatetime']]);
+            $updatetime = null;
+        }
+    
+        $cost = (float) $row['cost'];
+        $maxCost = 99999999.99;
+    
         if (!is_numeric($cost) || $cost > $maxCost) {
             \Log::warning('Cost value out of range:', ['cost' => $cost]);
-            $cost = $maxCost; // Or handle the value as needed
+            $cost = $maxCost;
         }
+    
         return new Equipment([
-            'GroupofEquipment' => $row['group_of_equipment']?? '',
-            'SerialNo' => $row['serialno'] ?? '',
-            'NameEquipment' => $row['name']?? '',
+            'year' => $row['year'] ?? '',
+            'equipment_group' => $row['eqgroup'] ?? '',
+            'serial_no' => $row['serialno'] ?? '',
+            'equipment_name' => $row['equipmentname'] ?? '',
             'cost' => $cost,
-            'location' => $row['location'] ?? '',
-            'StartingDate' => $startingDate,
-            'Status' => $row['status'] ?? '', // ใช้ค่าเริ่มต้นถ้า Status เป็น null
-            'Company' => $row['company'] ?? '',
+            'buy_date' => $buyDate,  // Converted buy date
+            'department_name' => $row['departmentname'] ?? '',
+            'building_no' => $row['buildingno'] ?? '',
+            'room_no' => $row['roomno'] ?? '',
+            'status' => $row['status'] ?? '',
+            'create_time' => $createTime,  // Converted create time
+            'create_by' => $row['createby'] ?? '',
+            'update_time' => $updatetime,
+            'update_by' => $row['updateby'] ?? '',
         ]);
     }
+    
+    
     
     // private $current = 0 ;
     // public function model(array $row)

@@ -6,6 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\imEquipmentController;
 use App\Http\Controllers\Controlleradmin;
+<<<<<<< HEAD
+use App\Http\Controllers\Auth\LoginController;
+=======
+>>>>>>> 2d93caaeeead0f8270a8c653099ab7ad31bd372e
 use App\Http\Controllers\BorrowingController;
 
 //Borrow

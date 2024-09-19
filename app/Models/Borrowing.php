@@ -8,16 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Borrowing extends Model
 {
     use HasFactory;
-
-    // Define fillable attributes for mass assignment
     protected $fillable = [
         'user_id',
         'equipment_id',
-        'SerialNo',
-        'NameEquipment',
-        'cost',
-        'location',
+        'serial_no',
+        'equipment_name',
+        'building_no',
+        'room_no',
         'status',
+        'status_borrow',
         'borrowed_date',
         'returned_date',
     ];

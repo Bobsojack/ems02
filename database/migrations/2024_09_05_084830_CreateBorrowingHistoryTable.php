@@ -13,19 +13,25 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::create('borrow', function (Blueprint $table) {
+    Schema::create('borrowing', function (Blueprint $table) {
         $table->id('borrow_id');  // Primary key
-        $table->string('GroupofEquipment');
-        $table->string('SerialNo');
-        $table->string('NameEquipment');
-        $table->decimal('cost', 10, 2);  // For storing cost as a decimal value
-        $table->string('location');
-        $table->string('Company');
-        $table->string('Status');  // Borrowing status
-        $table->date('borrowed_date')->nullable();  // Nullable in case it's not borrowed yet
-        $table->date('returned_date')->nullable();  // Nullable in case it's not returned yet
+        $table->unsignedBigInteger('user_id')->nullable();  // Foreign key reference to users table
+        $table->unsignedBigInteger('equipment_id');  // Foreign key reference to equipments table
+        $table->string('serial_no');
+        $table->string('equipment_name');
+        $table->string('building_no');  
+        $table->string('room_no');
+        $table->string('status'); // Borrowing status
+        $table->string('status_borrow')->nullable();
+        $table->date('borrowed_date')->nullable();  
+        $table->date('returned_date')->nullable();  
         $table->timestamps();  // Adds created_at and updated_at fields
+    
+        // Define foreign keys
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        $table->foreign('equipment_id')->references('id')->on('equipments')->onDelete('cascade');
     });
+    
 }
 
     /**
@@ -35,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('borrowing_history');
+        Schema::dropIfExists('borrowing');
     }
 };

@@ -12,14 +12,19 @@ class equipment extends Model
     use HasFactory;
 
     protected $fillable = [
-        // 'equipment_id',
-        'GroupofEquipment',
-        'SerialNo',
-        'NameEquipment',
+        'year',
+        'equipment_group',
+        'serial_no',
+        'equipment_name',
         'cost',
-        'location',
-        'StartingDate',
-        'Status',
-        'Company',
+        'buy_date',
+        'department_name',
+        'building_no',
+        'room_no',
+        'status',
+        'create_time',
+        'create_by',
+        'update_time',
+        'update_by'
     ];
 }

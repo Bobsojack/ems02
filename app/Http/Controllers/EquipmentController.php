@@ -17,7 +17,7 @@ class EquipmentController extends Controller
         $equipments = DB::table('equipment')->get();
 
         // return response()->json(['data' => $equipments], 200);
-        return view('admin/AdminEquipment',['equipments' => $equipments]);
+        return view('admin/AdminEquipment02',['equipments' => $equipments]);
 
     }
     public function showname(Request $request)

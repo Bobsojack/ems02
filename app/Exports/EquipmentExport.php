@@ -16,28 +16,40 @@ class EquipmentExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'group_of_equipment',
+            'year',
+            'eqgroup',
             'serialno',
-            'name',
-            'costbaht',
-            'location',
-            'startingdate',
+            'equipmentname',
+            'cost',
+            'buyDate',
+            'departmentname',
+            'buildingno',
+            'roomno',
             'status',
-            'company',
+            'createTime',
+            'createby',
+            'updatetime',
+            'updateby'
         ];
     }
 
     public function map($equipment): array
     {
         return [
-            $equipment->GroupofEquipment,
-            $equipment->SerialNo,
-            $equipment->NameEquipment,
+            $equipment->year,
+            $equipment->equipment_group,
+            $equipment->serial_no,
+            $equipment->equipment_name,
             $equipment->cost,
-            $equipment->location,
-            $equipment->StartingDate,
-            $equipment->Status,
-            $equipment->Company,
+            $equipment->buy_date,
+            $equipment->department_name,
+            $equipment->building_no,
+            $equipment->room_no,
+            $equipment->status,
+            $equipment->create_time,
+            $equipment->create_by,
+            $equipment->update_time,
+            $equipment->update_by,
         ];
     }
 }
