@@ -16,19 +16,15 @@ class BorrowingController extends Controller
             foreach ($borrowingData as $item) {
                 Borrowing::create([
                     'user_id' => auth()->id(), // เก็บ User ID ของผู้ที่ยืม
-<<<<<<< HEAD
+
                     'equipment_id' => Equipment::where('serial_no', $item['serial_no'])->first()->equipment_id, // หาค่า equipment_id จาก SerialNo
                     'serial_no' => $item['serial_no'],
                     'equipment_name' => $item['equipment_name'],
                     'building_no' => $item['building_no'],
                     'room_no' => $item['room_no'],
-=======
-                    'equipment_id' => Equipment::where('SerialNo', $item['serialNo'])->first()->equipment_id, // หาค่า equipment_id จาก SerialNo
-                    'SerialNo' => $item['serialNo'],
-                    'NameEquipment' => $item['name'],
-                    'cost' => $item['cost'],
-                    'location' => $item['location'],
->>>>>>> 2d93caaeeead0f8270a8c653099ab7ad31bd372e
+
+
+
                     'status' => 'รอ', // สถานะเริ่มต้นคือ "รอ"
                     'borrowed_date' => $item['start_date'], // วันที่เริ่มยืม
                     'returned_date' => $item['end_date'],   // วันที่คืน
